@@ -73,6 +73,7 @@ const login = async (req, res) => {
       full_name: emailExist.full_name,
       email: emailExist.email,
       image: emailExist.profile_pic,
+      uuid: emailExist.uuid
     };
     if (emailExist.auth_type === "PORTAL") {
       const token = jwt.sign(
