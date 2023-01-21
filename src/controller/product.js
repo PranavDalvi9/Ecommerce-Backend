@@ -1,8 +1,8 @@
-import usermodel from '../models/user_model.js'
-import productModel from '../models/product_models.js'
-import bcryptjs from 'bcryptjs'
-import validator from 'validator'
-import jwt from "jsonwebtoken";
+const usermodel = require('../models/user_model.js')
+const productModel = require('../models/product_models.js')
+const bcryptjs = require('bcryptjs')
+const validator = require('validator')
+const jwt = require('jsonwebtoken')
 
 const error = (tag, key) => {
     if (tag === 1) return 'Invalid Request'
@@ -38,7 +38,10 @@ const getAllProduct = async (req, res) => {
             let regex = new RegExp(`\\b${filter.category}\\b`, "i");
             data['tag'] = { $regex: regex }
         }
-        const response = await productModel.find(data)
+        if (filter.discount) {
+            data = { 'price.discount': { $gt: filter.discount } }
+        }
+        const response = await productModel.find(data);
         return res.status(200).send({ message: "Product details fetched  successfully", data: response });
 
     } catch (error) {
@@ -54,4 +57,4 @@ const getAllbrand = async (req, res) => {
     }
 }
 
-export default { addProduct, getAllbrand, getAllProduct }
+module.exports = { addProduct, getAllbrand, getAllProduct }

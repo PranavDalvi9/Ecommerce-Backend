@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+const jwt = require('jsonwebtoken')
 
 const auth = async (req, res, next) => {
     try {
@@ -7,7 +7,7 @@ const auth = async (req, res, next) => {
         if (!token && !uid) {
             return res.status(401).send({ message: "Unauthorized" });
         }
-        let payload
+        let payload;
         if (token) {
             jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
                 if (err) {
@@ -23,4 +23,5 @@ const auth = async (req, res, next) => {
         res.status(500).send({ message: error.message });
     }
 }
-export { auth }
+
+module.exports = {auth}

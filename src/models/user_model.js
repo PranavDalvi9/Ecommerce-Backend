@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-
-const uuid = mongoose.Types.uuid;
+const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema(
   {
@@ -32,4 +30,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
-export default mongoose.model("user", userSchema);
+module.exports = mongoose.model("user", userSchema);

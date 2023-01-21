@@ -1,8 +1,8 @@
-import usermodel from "../models/user_model.js";
-import bcryptjs from "bcryptjs";
-import validator from "validator";
-import jwt from "jsonwebtoken";
-import { v4 as uuidv4 } from "uuid";
+const usermodel = require('../models/user_model.js')
+const bcryptjs = require('bcryptjs')
+const validator = require('validator')
+const jwt = require('jsonwebtoken')
+const {  uuidv4 } = require('uuid')
 
 const error = (tag, key) => {
   if (tag === 1) return "Invalid Request";
@@ -99,4 +99,4 @@ const login = async (req, res) => {
   }
 };
 
-export default { signUp, login };
+module.exports = { signUp, login };

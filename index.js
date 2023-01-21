@@ -1,12 +1,13 @@
-import dotenv from "dotenv";
+const dotenv = require('dotenv');
+const router = require('./src/routes/routes.js')
+const express = require('express')
+const dbconnection = require('./src/config/db.js')
 dotenv.config();
-import router from "./src/routes/routes.js";
-import express from "express";
-import dbconnection from "./src/config/db.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
+
 app.use("/", router);
 
 app.listen(port, async (req, res) => {
